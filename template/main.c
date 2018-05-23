@@ -2,21 +2,22 @@
 #include <linux/init.h>
 #include <linux/kernel.h>
 
-static int __init hi(void)
+static char* module_name = "template module";
+
+static int __init kmodule_init(void)
 {
-    printk(KERN_INFO "module m1 being loaded.\n");
+    printk(KERN_INFO "%s being loaded.\n", module_name);
 
 
     return 0;
 }
 
-static void __exit bye(void)
+static void __exit kmodule_exit(void)
 {
-    printk(KERN_INFO "module m1 being unloaded.\n");
+    printk(KERN_INFO "%s being unloaded.\n", module_name);
 }
 
-module_init(hi);
-module_exit(bye);
+module_init(kmodule_init);
+module_exit(kmodule_exit);
 
-MODULE_AUTHOR("NAM.REKCUF.EMOS");
 MODULE_LICENSE("GPL"); 
