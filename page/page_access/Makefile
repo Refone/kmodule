@@ -1,5 +1,5 @@
-obj-m = page.o
-page-objs := main.o
+obj-m = page_access.o
+page_access-objs := main.o
 
 all:
 	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules

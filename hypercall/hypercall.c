@@ -1,15 +1,15 @@
 #include <linux/module.h>
 #include <linux/init.h>
 #include <linux/kernel.h>
-
-#include <xen/interface/xen.h>
-#include <asm/xen/hypercall.h>
+#include <asm/kvm_para.h> 
 
 static int __init hi(void)
 {
     printk(KERN_INFO "hypercall test module init.\n");
 
-	//_hypercall1(int, cuckoo_copy, 4096);
+	kvm_hypercall0(24);//EPT APPEND
+//	kvm_hypercall0(22);//EPT DUMP
+	kvm_hypercall0(23);//EPT SET RO
 	//HYPERVISOR_cuckoo_copy(4096);
 //	int fd, ret;
 //	char * message;
@@ -33,6 +33,7 @@ static int __init hi(void)
 
 static void __exit bye(void)
 {
+	kvm_hypercall0(21);	//EPT CLEAR
     printk(KERN_INFO "hypercall test module exit.\n");
 }
 
